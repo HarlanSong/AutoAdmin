@@ -56,4 +56,3 @@ Maven构建成功后点击运行即可。（建议IDE使用Idea）
 
 ### 访问
 访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
-

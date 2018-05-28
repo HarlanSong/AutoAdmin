@@ -1,4 +1,4 @@
-package cn.songhaiqing.tool.commons.interceptor;
+package cn.songhaiqing.tool.interceptor;
 
 import cn.songhaiqing.tool.base.BaseController;
 import org.springframework.web.servlet.HandlerInterceptor;
