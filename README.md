@@ -1,5 +1,5 @@
-# AutoAdmin Java快速发服务端
-AutoAdmin是使用Java语言开发快速开发项目，非常适合对效率要求不是非常高的个人或中小企业。在一些开发人员不是很多的情况下可以同时作管理端、APP接口、官网，WebAPP等。
+# AutoAdmin Java服务端
+基于AutoAdmin能快速的开发服务端，非常适合对效率要求不是非常高的个人或中小企业。在一些开发人员不是很多的情况下可以同时用作管理端、APP接口、官网，WebAPP等，并且可以结合代码生成工具[AutoCoding](http://tool.songhaiqing.cn/)效率加倍。
 
 ## 结构
 **后端：** [Spring Boot](https://projects.spring.io/spring-boot/)、[Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
@@ -8,9 +8,9 @@ AutoAdmin是使用Java语言开发快速开发项目，非常适合对效率要�
 ## 特点
 * **部署容易** 内置Tomcat可直接运行，省去了配置tomcat的步骤。
 * **配置简单** 使用 `application properties` 替代了大部分XML的繁琐配置。
-* **少写SQL** 写SQL是一个很耗时的事情，使用JPA，不写SQL的情况下能满足大部分业务需求。（同时也支持自定义SQL）
+* **少写SQL** 写SQL是一个很耗时的事情，使用Spring Data JPA，不写SQL的情况下能满足大部分业务需求。（同时也支持自定义SQL）
 * **写接口简单** 定义一个HTTP接口是个简单的事情。
-* **管理端开发简单且漂亮** 以前往往快速开发和漂亮往往不能兼得，现在有了LayUI的诞生让这个梦也成为现实，非常感谢LayUI作者贤心。 
+* **管理端简单且漂亮** 以前往往快速开发和漂亮往往不能兼得，现在有了[LayUI](http://www.layui.com/)的诞生让这个“梦”也成为现实，非常感谢LayUI的作者。 
 * **开发快速** 在本项目代码量相对较少的情况下提供了[AutoCoding](http://tool.songhaiqing.cn/),只需要将创建表SQL就能生成管理端的增删改查的大部分代码。
 * **开源免费** 本项目完全开源免费，可用于学习交流甚至商业。 
 
@@ -56,3 +56,39 @@ Maven构建成功后点击运行即可。（建议IDE使用Idea）
 
 ### 访问
 访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
+
+## 参考文档
+### application properties 配置
+
+<https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html>
+这块的内容比较多，一起慢慢学习研究分享。
+ 
+### JPA支持语法
+Keyword|Sample|JPQL snippet
+---|---|---
+And | findByLastnameAndFirstname | … where x.lastname = ?1 and x.firstname = ?2
+Or | findByLastnameOrFirstname | … where x.lastname = ?1 or x.firstname = ?2
+Is,Equals | findByFirstname,findByFirstnameIs,findByFirstnameEquals|… where x.firstname = ?1
+Between | findByStartDateBetween | … where x.startDate between ?1 and ?2
+LessThan | findByAgeLessThan | … where x.age < ?1
+LessThanEqual | findByAgeLessThanEqual | … where x.age <= ?1
+GreaterThan | findByAgeGreaterThan | … where x.age > ?1
+GreaterThanEqual | findByAgeGreaterThanEqual | … where x.age >= ?1
+After | findByStartDateAfter | … where x.startDate > ?1
+Before | findByStartDateBefore | … where x.startDate < ?1
+IsNull | findByAgeIsNull | … where x.age is null
+IsNotNull,NotNull | findByAge(Is)NotNull | … where x.age not null
+Like | findByFirstnameLike | … where x.firstname like ?1
+NotLike | findByFirstnameNotLike | … where x.firstname not like ?1
+StartingWith | findByFirstnameStartingWith | … where x.firstname like ?1(parameter bound with appended %)
+EndingWith | findByFirstnameEndingWith | … where x.firstname like ?1(parameter bound with prepended %)
+Containing | findByFirstnameContaining | … where x.firstname like ?1(parameter bound wrapped in %)
+OrderBy | findByAgeOrderByLastnameDesc | … where x.age = ?1 order by x.lastname desc
+Not | findByLastnameNot | … where x.lastname <> ?1
+In | findByAgeIn(Collection<Age> ages) | … where x.age in ?1
+NotIn | findByAgeNotIn(Collection<Age> ages) | … where x.age not in ?1
+True | findByActiveTrue() | … where x.active = true
+False | findByActiveFalse() | … where x.active = false
+IgnoreCase | findByFirstnameIgnoreCase | … where UPPER(x.firstame) = UPPER(?1)
+
+
