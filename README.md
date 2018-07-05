@@ -1,5 +1,5 @@
 # AutoAdmin Java服务端
-基于AutoAdmin能快速的开发服务端，非常适合对效率要求不是非常高的个人或中小企业。在一些开发人员不是很多的情况下可以同时用作管理端、APP接口、官网，WebAPP等，并且可以结合代码生成工具[AutoCoding](http://tool.songhaiqing.cn/)效率加倍。
+使用AutoAdmin能快速的开发服务端，非常适合对效率要求不是非常高的个人或中小企业。在一些开发人员不是很多的情况下可以同时用作管理端、APP接口、官网，WebAPP等开发效率更佳，并且可以结合代码生成工具[AutoCoding](http://tool.songhaiqing.cn/)效率加倍。
 
 ## 结构
 **后端：** [Spring Boot](https://projects.spring.io/spring-boot/)、[Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
@@ -16,25 +16,37 @@
 
 ## 项目结构
 ```
---db 数据库脚本数据
---doc 项目文档
---src...java
---src...--base 基础
---src...--commons 工具
---src...--constants 常量
---src...--controller 控制层，建议不同的业务包统一前缀，方便过滤和防止Controller重名。
---src...----admin		管理端控制层
---src...--entity 表实体类
---src...--interceptor 过滤器
---src...--model  视图实体类
---src...--repository 表操作类（JPA）
---src...--service 服务类
---src...resources
---src...--static  资源文件
---src...--application.properties 项目配置文件
---src...--log4j.properties 日志配置
---src...--messages.properties 消息定义
-...
+├─db 数据库脚本数据
+├─doc 项目文档
+├─src main
+│	├─java
+│	│	├─base 基础类
+│	│	│	└─BaseController.java 
+│	│	│	└─BaseEntity.java
+│	│	│	└─BaseQuery.java
+│	│	│	└─BaseResponse.java
+│	│	│	└─BaseResponseList.java
+│	│	│	└─BaseViewModel.java
+│	│	├─utils 工具类
+│	│	│	└─DateUtil.java
+│	│	│	└─MD5Util.java
+│	│	├─constants 常量
+│	│	├─controller 控制层，建议不同的业务包统一前缀，方便过滤和防止Controller重名。
+│	│	├─admin		管理端控制层
+│	│	├─entity 表实体类
+│	│	├─interceptor 过滤器
+│	│	├─model  视图实体类
+│	│	├─repository 表操作类（JPA）
+│	│	├─service 服务类
+│	├─resources
+│	├─static  资源文件
+│	└─application.properties 项目主配置文件
+│	└─application-dev.properties 开发环境配置文件
+│	└─application-test.properties 测量环境配置文件
+│	└─application-pro.properties 正式环境配置文件
+│	└─log4j.properties 日志配置
+│	└─messages.properties 消息定义
+└─ README.md
 ```
 
 ## 管理端功能
@@ -45,23 +57,37 @@
 
 ## 项目环境要求
 * Java7及以上
+* Mysql5.5及以上
 
 ## 快速入门
 
 ### 1.导入数据库
-创建数据库，导入 dbscript/auto_admin.sql,修改application.properties配置文件中的数据库信息，同时配置文件可定义tomcat运行端口。
+创建数据库，导入 dbscript/auto_admin.sql
 
-### 2.运行
-Maven构建成功后点击运行即可。（建议IDE使用Idea）
+### 2.修改配置文件
+修改配置文件中的数据库连接、端口等信息
+application.properties为主要配置文件,可修改文件中`spring.profiles.active`的值来指定不同环境：
+* application.properties 主配置文件，不随环境变化的的配置可以写在这里。
+* application-dev.properties 开发环境
+* application-test.properties 测试环境
+* application-pro.properties 正式环境
 
-### 访问
-访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
+**数据库连接信息**
+```
+spring.datasource.url
+spring.datasource.username
+spring.datasource.password
+```
 
-## 参考文档
-### application properties 配置
+[application properties 官方文档](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html),这块的内容比较多，有兴趣朋友的可以参考一下。
 
-<https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html>
-这块的内容比较多，一起慢慢学习研究分享。
+### 3. 运行
+Maven构建成功后可看到Application可运行，后点击运行即可。（建议IDE使用Idea）
+
+### 4、访问
+根据自己配置的端口（`server.port`）访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
+
+
  
 ### JPA支持语法
 Keyword|Sample|JPQL snippet
@@ -91,4 +117,7 @@ True | findByActiveTrue() | … where x.active = true
 False | findByActiveFalse() | … where x.active = false
 IgnoreCase | findByFirstnameIgnoreCase | … where UPPER(x.firstame) = UPPER(?1)
 
+
+## 联系方式
+* Email:harlansong@qq.com
 
