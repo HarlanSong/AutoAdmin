@@ -4,49 +4,49 @@
 
 ## 结构
 **后端：** [Spring Boot](https://projects.spring.io/spring-boot/)、[Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
-**前端：** [LayUI](http://www.layui.com/) 
+**前端：** [LayUI](http://www.layui.com/)
 
 ## 特点
 * **部署容易** 内置Tomcat可直接运行，省去了配置tomcat的步骤。
 * **配置简单** 使用 `application properties` 替代了大部分XML的繁琐配置。
 * **少写SQL** 写SQL是一个很耗时的事情，使用Spring Data JPA，不写SQL的情况下能满足大部分业务需求。（同时也支持自定义SQL）
 * **写接口简单** 定义一个HTTP接口是个简单的事情。
-* **管理端简单且漂亮** 以前往往快速开发和漂亮往往不能兼得，现在有了[LayUI](http://www.layui.com/)的诞生让这个“梦”也成为现实，非常感谢LayUI的作者。 
+* **管理端简单且漂亮** 以前往往快速开发和漂亮往往不能兼得，现在有了[LayUI](http://www.layui.com/)的诞生让这个“梦”也成为现实，非常感谢LayUI的作者。
 * **开发快速** 在本项目代码量相对较少的情况下提供了[AutoCoding](http://tool.songhaiqing.cn/),只需要将创建表SQL就能生成管理端的增删改查的大部分代码。
-* **开源免费** 本项目完全开源免费，可用于学习交流甚至商业。 
+* **开源免费** 本项目完全开源免费，可用于学习交流甚至商业。
 
 ## 项目结构
 ```
 ├─db 数据库脚本数据
 ├─doc 项目文档
 ├─src main
-│	├─java
-│	│	├─base 基础类
-│	│	│	└─BaseController.java 
-│	│	│	└─BaseEntity.java
-│	│	│	└─BaseQuery.java
-│	│	│	└─BaseResponse.java
-│	│	│	└─BaseResponseList.java
-│	│	│	└─BaseViewModel.java
-│	│	├─utils 工具类
-│	│	│	└─DateUtil.java
-│	│	│	└─MD5Util.java
-│	│	├─constants 常量
-│	│	├─controller 控制层，建议不同的业务包统一前缀，方便过滤和防止Controller重名。
-│	│	├─admin		管理端控制层
-│	│	├─entity 表实体类
-│	│	├─interceptor 过滤器
-│	│	├─model  视图实体类
-│	│	├─repository 表操作类（JPA）
-│	│	├─service 服务类
-│	├─resources
-│	├─static  资源文件
-│	└─application.properties 项目主配置文件
-│	└─application-dev.properties 开发环境配置文件
-│	└─application-test.properties 测量环境配置文件
-│	└─application-pro.properties 正式环境配置文件
-│	└─log4j.properties 日志配置
-│	└─messages.properties 消息定义
+│ ├─java
+│ │ ├─base 基础类
+│ │ │ └─BaseController.java
+│ │ │ └─BaseEntity.java
+│ │ │ └─BaseQuery.java
+│ │ │ └─BaseResponse.java
+│ │ │ └─BaseResponseList.java
+│ │ │ └─BaseViewModel.java
+│ │ ├─utils 工具类
+│ │ │ └─DateUtil.java
+│ │ │ └─MD5Util.java
+│ │ ├─constants 常量
+│ │ ├─controller 控制层，建议不同的业务包统一前缀，方便过滤和防止Controller重名。
+│ │ ├─admin		管理端控制层
+│ │ ├─entity 表实体类
+│ │ ├─interceptor 过滤器
+│ │ ├─model  视图实体类
+│ │ ├─repository 表操作类（JPA）
+│ │ ├─service 服务类
+│ ├─resources
+│ ├─static  资源文件
+│ └─application.properties 项目主配置文件
+│ └─application-dev.properties 开发环境配置文件
+│ └─application-test.properties 测量环境配置文件
+│ └─application-pro.properties 正式环境配置文件
+│ └─log4j.properties 日志配置
+│ └─messages.properties 消息定义
 └─ README.md
 ```
 
@@ -89,7 +89,7 @@ Maven构建成功后可看到Application可运行，后点击运行即可。（�
 根据自己配置的端口（`server.port`）访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
 
 
- 
+
 ### JPA支持语法
 Keyword|Sample|JPQL snippet
 ---|---|---
@@ -121,4 +121,3 @@ IgnoreCase | findByFirstnameIgnoreCase | … where UPPER(x.firstame) = UPPER(?1)
 
 ## 联系方式
 * Email:harlansong@qq.com
-
