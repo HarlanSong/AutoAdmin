@@ -15,15 +15,15 @@
             <legend>系统管理 - 系统用户</legend>
         </fieldset>
         <div class="layui-btn-group">
-            <button class="layui-btn layui-btn-sm btn-add">
+            <a class="layui-btn layui-btn-sm btn-add">
                 <i class="layui-icon">&#xe654;</i>
-            </button>
-            <button class="layui-btn layui-btn-sm btn-update">
+            </a>
+            <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
                 <i class="layui-icon">&#xe642;</i>
-            </button>
-            <button class="layui-btn layui-btn-sm btn-delete">
+            </a>
+            <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
                 <i class="layui-icon">&#xe640;</i>
-            </button>
+            </a>
         </div>
 
         <table id="table">
@@ -38,7 +38,7 @@
         var $ = layui.jquery;
         table.render({
             elem: '#table',
-            id: "menu",
+            id: "sys-user-table",
             url: '/admin/sysUser/getSysUserPage',
             page: true,
             limit: 20,
@@ -67,7 +67,7 @@
         });
 
         $(".btn-update").on("click", function () {
-            var checkData = table.checkStatus('menu').data;
+            var checkData = table.checkStatus('sys-user-table').data;
             if (checkData.length != 1) {
                 layer.msg("请选中一条记录编辑！");
                 return;
@@ -82,6 +82,33 @@
                 end: function () {
                     location.reload();
                 }
+            });
+        });
+
+        $(".btn-delete").on("click", function () {
+            var checkData = table.checkStatus('sys-user-table').data;
+            if (checkData.length < 1) {
+                layer.msg("请选中要删除的数据！");
+                return;
+            }
+            layer.confirm('您确定要删除这' + checkData.length + '条数据吗？', {
+                btn: ['确认', '取消']
+            }, function (index) {
+                layer.close(index);
+                var ids = new Array();
+                $.each(checkData, function (index, val) {
+                    ids.push(val.id);
+                });
+
+                $.post("/admin/sysUser/deleteSysUser", {ids: ids.join(",")}, function (data) {
+                    if (data.code === 0) {
+                        layer.msg('删除成功', {icon: 1});
+                        location.reload();
+                        table.reload("sys-user-table");
+                    } else {
+                        layer.alert(data.msg, {icon: 5});
+                    }
+                }, "json");
             });
         });
 

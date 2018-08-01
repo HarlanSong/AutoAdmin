@@ -116,5 +116,10 @@ public class AdminSysUserController extends BaseController {
         sysUserService.updateUser(model, roleIds);
         return success();
     }
+    @RequestMapping(value = "/deleteSysUser")
+    public BaseResponse deleteSysUser( @RequestParam Long[] ids){
+        sysUserService.deleteSysUser(ids);
+        return success();
+    }
 
 }

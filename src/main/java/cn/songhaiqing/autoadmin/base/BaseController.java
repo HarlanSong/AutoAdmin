@@ -1,6 +1,5 @@
 package cn.songhaiqing.autoadmin.base;
 
-
 import cn.songhaiqing.autoadmin.constants.ErrorCode;
 import cn.songhaiqing.autoadmin.model.SysUserViewModel;
 import javax.servlet.http.HttpServletRequest;

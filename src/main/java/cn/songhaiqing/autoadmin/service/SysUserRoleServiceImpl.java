@@ -1,5 +1,6 @@
 package cn.songhaiqing.autoadmin.service;
 
+import cn.songhaiqing.autoadmin.entity.SysRole;
 import cn.songhaiqing.autoadmin.entity.SysUserRole;
 import cn.songhaiqing.autoadmin.repository.SysUserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -76,5 +78,23 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
             }
 
         }
+    }
+
+    @Override
+    public void deleteByRole(long roleId) {
+        List<SysUserRole> sysUserRoles = sysUserRoleRepository.findByRoleId(roleId);
+        if(CollectionUtils.isEmpty(sysUserRoles)){
+            return ;
+        }
+        for (SysUserRole sysUserRole : sysUserRoles) {
+            sysUserRole.setDeleted(true);
+            sysUserRole.setUpdateTime(new Date());
+            sysUserRoleRepository.save(sysUserRole);
+        }
+    }
+
+    @Override
+    public List<SysUserRole> getSysUserRolesByUser(long userId) {
+        return sysUserRoleRepository.findByUserId(userId);
     }
 }

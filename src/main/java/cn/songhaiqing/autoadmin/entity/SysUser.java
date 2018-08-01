@@ -24,10 +24,6 @@ public class SysUser extends BaseEntity {
     @Column(name = "salt")
     private String salt;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sysUser")
-    private List<SysUserRole> sysUserRoles;
-
-
     public String getAccount() {
         return account;
     }
@@ -58,13 +54,5 @@ public class SysUser extends BaseEntity {
 
     public void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    public List<SysUserRole> getSysUserRoles() {
-        return sysUserRoles;
-    }
-
-    public void setSysUserRoles(List<SysUserRole> sysUserRoles) {
-        this.sysUserRoles = sysUserRoles;
     }
 }

@@ -1,5 +1,6 @@
 package cn.songhaiqing.autoadmin.service;
 
+import cn.songhaiqing.autoadmin.entity.SysUserRole;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +30,9 @@ public interface SysUserRoleService {
      * @param roleIds
      */
     void updateUserRole(long userId, List<Long> roleIds);
+
+    void deleteByRole(long sysRoleId);
+
+    List<SysUserRole> getSysUserRolesByUser(long userId);
 
 }

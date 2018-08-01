@@ -21,8 +21,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/admin/role")
-public class AdminRoleController extends BaseController {
+@RequestMapping("/admin/sysRole")
+public class AdminSysRoleController extends BaseController {
 
     @Autowired
     private SysRoleService sysRoleService;
@@ -30,36 +30,36 @@ public class AdminRoleController extends BaseController {
     @Autowired
     private MenuService menuService;
 
-    @RequestMapping(value = "/roleView")
+    @RequestMapping(value = "/sysRoleView")
     public ModelAndView roleView() {
-        return new ModelAndView("/admin/role");
+        return new ModelAndView("/admin/sysRole");
     }
 
-    @RequestMapping(value = "/getRolePage")
-    public BaseResponseList getRolePage(BaseQuery query) {
+    @RequestMapping(value = "/getSysRolePage")
+    public BaseResponseList getSysRolePage(BaseQuery query) {
         return sysRoleService.getSysRole(query);
     }
 
-    @RequestMapping(value = "/addRoleView")
+    @RequestMapping(value = "/addSysRoleView")
     public ModelAndView addRoleView() {
-        ModelAndView modelAndView = new ModelAndView("/admin/roleAdd");
+        ModelAndView modelAndView = new ModelAndView("/admin/sysRoleAdd");
         List<MenuViewModel> menuViewModels = menuService.getAllMenuByRole(null);
         modelAndView.addObject("menuViewModels", menuViewModels);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editRoleView")
-    public ModelAndView editRoleView(HttpServletRequest request, @RequestParam Long id) {
+    @RequestMapping(value = "/updateSysRoleView")
+    public ModelAndView updateSysRoleView(HttpServletRequest request, @RequestParam Long id) {
         SysRoleViewModel sysRole = sysRoleService.getSysRoleDetail(id);
-        ModelAndView modelAndView = new ModelAndView("/admin/roleEdit");
+        ModelAndView modelAndView = new ModelAndView("/admin/sysRoleUpdate");
         List<MenuViewModel> menuViewModels = menuService.getAllMenuByRole(id);
         modelAndView.addObject("sysRole", sysRole);
         modelAndView.addObject("menuViewModels", menuViewModels);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addRole", method = RequestMethod.POST)
-    public BaseResponse addSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
+    @RequestMapping(value = "/addSysRole", method = RequestMethod.POST)
+    public BaseResponse addSysRole(SysRoleViewModel model, Long[] menuIds) {
         if (menuIds == null || menuIds.length == 0) {
             return fail(AdminErrorMsg.PLEASE_CHOOSE_MENU);
         }
@@ -67,12 +67,18 @@ public class AdminRoleController extends BaseController {
         return success();
     }
 
-    @RequestMapping(value = "/editRole", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateSysRole", method = RequestMethod.POST)
     public BaseResponse editSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
         if (menuIds == null || menuIds.length == 0) {
             return fail(AdminErrorMsg.PLEASE_CHOOSE_MENU);
         }
         sysRoleService.update(model, menuIds);
+        return success();
+    }
+
+    @RequestMapping(value = "/deleteSysRole")
+    public BaseResponse deleteSysRole( @RequestParam Long[] ids){
+        sysRoleService.deleteSysRole(ids);
         return success();
     }
 }

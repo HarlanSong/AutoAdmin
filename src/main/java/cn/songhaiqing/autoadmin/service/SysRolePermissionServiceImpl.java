@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,15 +24,6 @@ public class SysRolePermissionServiceImpl implements SysRolePermissionService {
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
-    @Override
-    public void insert(SysRolePermissionViewModel model) {
-
-    }
-
-    @Override
-    public void update(SysRolePermissionViewModel model) {
-
-    }
 
     @Override
     public SysRolePermissionViewModel getSysRolePermissionDetail(long id) {
@@ -59,31 +51,31 @@ public class SysRolePermissionServiceImpl implements SysRolePermissionService {
         List<Long> localMenuIds = new ArrayList<>();
         List<SysRolePermission> sysRolePermissions = sysRolePermissionRepository.findByRoleId(roleId);
         List<Long> deleteIds = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(sysRolePermissions)){
+        if (!CollectionUtils.isEmpty(sysRolePermissions)) {
             for (SysRolePermission sysRolePermission : sysRolePermissions) {
                 localMenuIds.add(sysRolePermission.getMenuId());
-                if(!menusIds.contains(sysRolePermission.getMenuId())){
+                if (!menusIds.contains(sysRolePermission.getMenuId())) {
                     deleteIds.add(sysRolePermission.getId());
                 }
             }
         }
         List<Long> addMenuIds = new ArrayList<>();
         for (Long menuId : menusIds) {
-            if(!localMenuIds.contains(menuId)){
+            if (!localMenuIds.contains(menuId)) {
                 addMenuIds.add(menuId);
             }
         }
 
         // 删除
-        if(!deleteIds.isEmpty()) {
+        if (!deleteIds.isEmpty()) {
             for (Long deleteId : deleteIds) {
                 sysRolePermissionRepository.delete(deleteId);
             }
         }
         //添加
-        if(!addMenuIds.isEmpty()) {
+        if (!addMenuIds.isEmpty()) {
             for (Long addMenuId : addMenuIds) {
-                SysRolePermission  sysRolePermission = new SysRolePermission();
+                SysRolePermission sysRolePermission = new SysRolePermission();
                 sysRolePermission.setRoleId(roleId);
                 sysRolePermission.setMenuId(addMenuId);
                 sysRolePermissionRepository.save(sysRolePermission);
@@ -120,5 +112,18 @@ public class SysRolePermissionServiceImpl implements SysRolePermissionService {
             menuIds.add(sysRolePermission.getMenuId());
         }
         return menuIds;
+    }
+
+    @Override
+    public void deleteByRole(long roleId) {
+        List<SysRolePermission> sysRolePermissions = sysRolePermissionRepository.findByRoleId(roleId);
+        if (CollectionUtils.isEmpty(sysRolePermissions)) {
+            return;
+        }
+        for (SysRolePermission sysRolePermission : sysRolePermissions) {
+            sysRolePermission.setDeleted(true);
+            sysRolePermission.setUpdateTime(new Date());
+            sysRolePermissionRepository.save(sysRolePermission);
+        }
     }
 }

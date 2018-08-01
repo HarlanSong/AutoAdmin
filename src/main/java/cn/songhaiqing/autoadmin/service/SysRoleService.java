@@ -20,4 +20,6 @@ public interface SysRoleService {
     BaseResponseList<SysRoleViewModel> getSysRole(BaseQuery query);
 
     List<SysRoleViewModel> getAllRoles(Long userId);
+
+    void deleteSysRole(Long[] ids);
 }

@@ -71,7 +71,7 @@
                 })
                 params.roleIds = menuArray.join(",");
             }
-            $.post("/admin/user/addSysUser", params, function (data) {
+            $.post("/admin/sysUser/addSysUser", params, function (data) {
                 if (data.code === 0) {
                     parent.layer.closeAll();
                     layer.msg('创建成功', {icon: 1});

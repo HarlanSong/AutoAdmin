@@ -17,15 +17,18 @@
         </fieldset>
 
         <div class="layui-btn-group">
-            <button class="layui-btn layui-btn-sm btn-add">
+            <a class="layui-btn layui-btn-sm btn-add">
                 <i class="layui-icon">&#xe654;</i>
-            </button>
-            <button class="layui-btn layui-btn-sm btn-update">
+            </a>
+            <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
                 <i class="layui-icon">&#xe642;</i>
-            </button>
+            </a>
+            <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
         </div>
 
-        <table id="table">
+        <table id="table" lay-filter="sys-role">
         </table>
     </div>
 </div>
@@ -37,8 +40,8 @@
         var $ = layui.jquery;
         table.render({
             elem: '#table',
-            id: "menu",
-            url: '/admin/role/getRolePage',
+            id: "sys-role-table",
+            url: '/admin/sysRole/getSysRolePage',
             page: true,
             limit: 20,
             cols: [[
@@ -55,7 +58,7 @@
             layer.open({
                 formType: 2,
                 type: 2,
-                content: '/admin/role/addRoleView',
+                content: '/admin/sysRole/addSysRoleView',
                 title: '添加角色',
                 area: ['800px', '600px'],
                 end: function () {
@@ -65,7 +68,7 @@
         });
 
         $(".btn-update").on("click", function () {
-            var checkData = table.checkStatus('menu').data;
+            var checkData = table.checkStatus('sys-role-table').data;
             if (checkData.length != 1) {
                 layer.msg("请选中一条记录编辑！");
                 return;
@@ -74,12 +77,39 @@
             layer.open({
                 formType: 2,
                 type: 2,
-                content: '/admin/role/editRoleView?id=' + id,
+                content: '/admin/sysRole/updateSysRoleView?id=' + id,
                 title: '编辑角色',
                 area: ['800px', '600px'],
                 end: function () {
                     location.reload();
                 }
+            });
+        });
+
+        $(".btn-delete").on("click", function () {
+            var checkData = table.checkStatus('sys-role-table').data;
+            if (checkData.length < 1) {
+                layer.msg("请选中要删除的数据！");
+                return;
+            }
+            layer.confirm('您确定要删除这' + checkData.length + '条数据吗？', {
+                btn: ['确认', '取消']
+            }, function (index) {
+                layer.close(index);
+                var ids = new Array();
+                $.each(checkData, function (index, val) {
+                    ids.push(val.id);
+                });
+
+                $.post("/admin/sysRole/deleteSysRole", {ids: ids.join(",")}, function (data) {
+                    if (data.code === 0) {
+                        layer.msg('删除成功', {icon: 1});
+                        location.reload();
+                        table.reload("sys-role-table");
+                    } else {
+                        layer.alert(data.msg, {icon: 5});
+                    }
+                }, "json");
             });
         });
 

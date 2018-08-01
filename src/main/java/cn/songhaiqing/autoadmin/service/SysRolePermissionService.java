@@ -11,10 +11,6 @@ import java.util.List;
 @Service
 public interface SysRolePermissionService {
 
-    void insert (SysRolePermissionViewModel model);
-
-    void update (SysRolePermissionViewModel model);
-
     SysRolePermissionViewModel getSysRolePermissionDetail(long id);
 
     BaseResponseList<SysRolePermissionViewModel> getSysRolePermission(BaseQuery query);
@@ -37,4 +33,6 @@ public interface SysRolePermissionService {
     List<Long> getMenuIdsByUser(long userId);
 
     List<Long> getMenuIdsByRole(long roleId);
+
+    void deleteByRole(long roleId);
 }

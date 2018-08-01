@@ -59,12 +59,6 @@ public class SysUserServiceImpl implements SysUserService {
             @Override
             public Predicate toPredicate(Root<SysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicate = new ArrayList<>();
-                // TODO 示例
-                /**
-                 if (query.getType() != null) {
-                 predicate.add(cb.equal(r.get("type").as(Integer.class), query.getType()));
-                 }
-                 */
                 Predicate[] pre = new Predicate[predicate.size()];
                 return criteriaQuery.where(predicate.toArray(pre)).getRestriction();
             }
@@ -80,7 +74,7 @@ public class SysUserServiceImpl implements SysUserService {
             model.setUpdateTime(DateUtil.dateToLongString(sysUser.getUpdateTime()));
             model.setCreateTime(DateUtil.dateToLongString(sysUser.getCreateTime()));
             StringBuffer roleName = new StringBuffer();
-            List<SysUserRole> sysUserRoles = sysUser.getSysUserRoles();
+            List<SysUserRole> sysUserRoles = sysUserRoleService.getSysUserRolesByUser(sysUser.getId());
             if(!CollectionUtils.isEmpty(sysUserRoles)) {
                 for (SysUserRole sysUserRole : sysUserRoles) {
                     roleName.append(" " + sysUserRole.getSysRole().getName());
@@ -148,5 +142,14 @@ public class SysUserServiceImpl implements SysUserService {
         model.setName(sysUser.getName());
         model.setAccount(sysUser.getAccount());
         return model;
+    }
+
+    @Override
+    public void deleteSysUser(Long[] ids) {
+        for (Long id : ids) {
+            SysUser sysUser = sysUserRepository.findOne(id);
+            sysUser.setDeleted(true);
+            sysUserRepository.save(sysUser);
+        }
     }
 }

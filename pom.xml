@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.songhaiqing.autoadmin</groupId>
     <artifactId>AutoAdmin</artifactId>
-    <version>1.0.1_201800705_base</version>
+    <version>1.0.2_20180801</version>
     <packaging>war</packaging>
     <name>AutoAdmin</name>
     <description>AutoAdmin Application</description>

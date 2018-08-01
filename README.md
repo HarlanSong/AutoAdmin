@@ -121,3 +121,11 @@ IgnoreCase | findByFirstnameIgnoreCase | … where UPPER(x.firstame) = UPPER(?1)
 
 ## 联系方式
 * Email:harlansong@qq.com
+
+
+## 更新日志
+**1.0.2_20180801**
+* 修复系统用户编辑及删除不成功问题。
+* 修复创建角色未选菜单无提示问题。
+* 添加角色删除功能。
+* role统一风格改成sysRole。

@@ -39,5 +39,5 @@ public interface SysUserService {
 
     SysUserViewModel getUserDetail(long id);
 
-
+    void deleteSysUser(Long[] ids);
 }

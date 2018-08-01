@@ -73,7 +73,7 @@
                 })
                 params.roleIds = menuArray.join(",");
             }
-            $.post("/admin/user/editSysUser", params, function (data) {
+            $.post("/admin/sysUser/editSysUser", params, function (data) {
                 if (data.code === 0) {
                     parent.layer.closeAll();
                     layer.msg('编辑成功', {icon: 1});

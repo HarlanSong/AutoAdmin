@@ -88,12 +88,6 @@ public class SysRoleServiceImpl implements SysRoleService {
             @Override
             public Predicate toPredicate(Root<SysRole> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicate = new ArrayList<>();
-                // TODO 示例
-                /**
-                 if (query.getType() != null) {
-                 predicate.add(cb.equal(r.get("type").as(Integer.class), query.getType()));
-                 }
-                 */
                 Predicate[] pre = new Predicate[predicate.size()];
                 return criteriaQuery.where(predicate.toArray(pre)).getRestriction();
             }
@@ -139,5 +133,16 @@ public class SysRoleServiceImpl implements SysRoleService {
             models.add(model);
         }
         return models;
+    }
+
+    @Override
+    public void deleteSysRole(Long[] ids) {
+        for (Long id : ids) {
+            SysRole sysRole = sysRoleRepository.findOne(id);
+            sysRole.setDeleted(true);
+            sysRoleRepository.save(sysRole);
+            sysRolePermissionService.deleteByRole(id);
+            sysUserRoleService.deleteByRole(id);
+        }
     }
 }

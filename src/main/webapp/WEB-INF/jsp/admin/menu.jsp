@@ -15,15 +15,15 @@
             <legend>系统管理 - 菜单管理</legend>
         </fieldset>
         <div class="layui-btn-group">
-            <button class="layui-btn layui-btn-sm btn-add">
+            <a class="layui-btn layui-btn-sm btn-add">
                 <i class="layui-icon">&#xe654;</i>
-            </button>
-            <button class="layui-btn layui-btn-sm btn-update">
+            </a>
+            <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
                 <i class="layui-icon">&#xe642;</i>
-            </button>
-            <button class="layui-btn layui-btn-sm btn-delete">
+            </a>
+            <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
                 <i class="layui-icon">&#xe640;</i>
-            </button>
+            </a>
         </div>
 
         <table id="table">
@@ -43,15 +43,15 @@
             page: true,
             limit: 20,
             cols: [[
-                {checkbox: true}
-                , {field: 'id', title: 'ID', width: 80}
-                , {field: 'name', title: '名称', width: 120}
-                , {field: 'url', title: 'URL', width: 300}
-                , {field: 'icon', title: '图标', width: 100}
-                , {field: 'parentId', title: '上级ID', width: 100}
-                , {field: 'orderNo', title: '排序号', width: 100}
-                , {field: 'updateTime', title: '更新时间', width: 200}
-                , {field: 'createTime', title: '创建时间', width: 200}
+                {checkbox: true},
+                {field: 'id', title: 'ID', width: 80},
+                {field: 'name', title: '名称', width: 120},
+                {field: 'url', title: 'URL', width: 300},
+                {field: 'icon', title: '图标', width: 100},
+                {field: 'parentId', title: '上级ID', width: 100},
+                {field: 'orderNo', title: '排序号', width: 100},
+                {field: 'updateTime', title: '更新时间', width: 200},
+                {field: 'createTime', title: '创建时间', width: 200}
             ]]
         });
 
@@ -61,7 +61,7 @@
                 type: 2,
                 content: '/admin/menu/addMenuView',
                 title: '添加菜单',
-                area: ['600px', '350px'], //自定义文本域宽高
+                area: ['600px', '400px'], //自定义文本域宽高
                 end: function () {
                     location.reload();
                 }
@@ -80,7 +80,7 @@
                 type: 2,
                 content: '/admin/menu/editMenuView?id=' + id,
                 title: '编辑菜单',
-                area: ['600px', '350px'],
+                area: ['600px', '400px'],
                 end: function () {
                     location.reload();
                 }
