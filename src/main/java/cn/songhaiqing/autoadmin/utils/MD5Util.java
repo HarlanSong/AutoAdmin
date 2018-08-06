@@ -25,8 +25,8 @@ public class MD5Util {
     // 转换字节数组为16进制字串
     private static String byteToString(byte[] bByte) {
         StringBuffer sBuffer = new StringBuffer();
-        for (int i = 0; i < bByte.length; i++) {
-            sBuffer.append(byteToArrayString(bByte[i]));
+        for (byte aBByte : bByte) {
+            sBuffer.append(byteToArrayString(aBByte));
         }
         return sBuffer.toString();
     }
@@ -34,7 +34,7 @@ public class MD5Util {
     public static String getMd5(String strObj) {
         String resultString = null;
         try {
-            resultString = new String(strObj);
+            resultString = strObj;
             MessageDigest md = MessageDigest.getInstance("MD5");
             resultString = byteToString(md.digest(strObj.getBytes()));
         } catch (NoSuchAlgorithmException ex) {

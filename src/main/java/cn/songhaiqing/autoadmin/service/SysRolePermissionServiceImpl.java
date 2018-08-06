@@ -1,15 +1,11 @@
 package cn.songhaiqing.autoadmin.service;
 
-import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.entity.SysRolePermission;
 import cn.songhaiqing.autoadmin.repository.SysRolePermissionRepository;
-import cn.songhaiqing.autoadmin.base.BaseResponseList;
-import cn.songhaiqing.autoadmin.model.SysRolePermissionViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,17 +19,6 @@ public class SysRolePermissionServiceImpl implements SysRolePermissionService {
 
     @Autowired
     private SysUserRoleService sysUserRoleService;
-
-
-    @Override
-    public SysRolePermissionViewModel getSysRolePermissionDetail(long id) {
-        return null;
-    }
-
-    @Override
-    public BaseResponseList<SysRolePermissionViewModel> getSysRolePermission(BaseQuery query) {
-        return null;
-    }
 
     @Transactional
     @Override

@@ -49,7 +49,6 @@ public class BaseController {
     }
 
     protected SysUserViewModel getAdminUser(HttpServletRequest servletRequest) {
-        SysUserViewModel user = (SysUserViewModel) servletRequest.getSession().getAttribute(KEY_ADMIN_USER);
-        return user;
+        return (SysUserViewModel) servletRequest.getSession().getAttribute(KEY_ADMIN_USER);
     }
 }

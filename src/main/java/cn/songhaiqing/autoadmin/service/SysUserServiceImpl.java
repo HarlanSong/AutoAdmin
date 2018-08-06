@@ -23,10 +23,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -74,7 +71,7 @@ public class SysUserServiceImpl implements SysUserService {
             model.setName(sysUser.getName());
             model.setUpdateTime(DateUtil.dateToLongString(sysUser.getUpdateTime()));
             model.setCreateTime(DateUtil.dateToLongString(sysUser.getCreateTime()));
-            StringBuffer roleName = new StringBuffer();
+            StringBuilder roleName = new StringBuilder();
             List<SysUserRole> sysUserRoles = sysUserRoleService.getSysUserRolesByUser(sysUser.getId());
             if(!CollectionUtils.isEmpty(sysUserRoles)) {
                 for (SysUserRole sysUserRole : sysUserRoles) {
@@ -119,9 +116,7 @@ public class SysUserServiceImpl implements SysUserService {
         }
         sysUserRepository.save(sysUser);
         List<Long> roleArrayIds = new ArrayList<>();
-        for (Long roleId : roleIds) {
-            roleArrayIds.add(roleId);
-        }
+        Collections.addAll(roleArrayIds, roleIds);
         sysUserRoleService.updateUserRole(model.getId(), roleArrayIds);
     }
 

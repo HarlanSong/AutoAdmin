@@ -54,9 +54,7 @@ public class AdminSysUserController extends BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public BaseResponse login(HttpServletRequest request, @RequestParam String account, @RequestParam String password) {
-        password = new MD5Util().getMd5(password);
-        SysUserViewModel user = sysUserService.login(account, password);
-
+        SysUserViewModel user = sysUserService.login(account, new MD5Util().getMd5(password));
         if(user == null){
             return fail(AdminErrorMsg.ACCOUNT_OR_PASSWORD_WRONG);
         }

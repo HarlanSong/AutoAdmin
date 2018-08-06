@@ -72,7 +72,7 @@
                 var menuArray = [];
                 checkedMenu.each(function () {
                     menuArray.push($(this).val());
-                })
+                });
                 params.menuIds = menuArray.join(",");
             }
             $.post("/admin/sysRole/addSysRole", params, function (data) {

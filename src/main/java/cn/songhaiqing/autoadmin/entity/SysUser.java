@@ -2,9 +2,9 @@ package cn.songhaiqing.autoadmin.entity;
 
 import cn.songhaiqing.autoadmin.base.BaseEntity;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity

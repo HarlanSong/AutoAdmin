@@ -9,6 +9,8 @@ import cn.songhaiqing.autoadmin.repository.SysRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,9 +60,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         sysRole.setUpdateTime(new Date());
         sysRoleRepository.save(sysRole);
         List<Long> ids = new ArrayList<>();
-        for (Long menuId : menuIds) {
-            ids.add(menuId);
-        }
+        Collections.addAll(ids, menuIds);
         sysRolePermissionService.updatePermission(model.getId(), ids);
     }
 

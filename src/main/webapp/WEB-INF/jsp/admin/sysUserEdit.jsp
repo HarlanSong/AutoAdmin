@@ -70,7 +70,7 @@
                 var menuArray = [];
                 checkedMenu.each(function () {
                     menuArray.push($(this).val());
-                })
+                });
                 params.roleIds = menuArray.join(",");
             }
             $.post("/admin/sysUser/editSysUser", params, function (data) {

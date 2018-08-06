@@ -1,6 +1,5 @@
 package cn.songhaiqing.autoadmin.service;
 
-import cn.songhaiqing.autoadmin.entity.SysRole;
 import cn.songhaiqing.autoadmin.entity.SysUserRole;
 import cn.songhaiqing.autoadmin.repository.SysUserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

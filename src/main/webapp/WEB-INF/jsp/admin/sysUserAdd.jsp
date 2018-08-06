@@ -68,7 +68,7 @@
                 var menuArray = [];
                 checkedMenu.each(function () {
                     menuArray.push($(this).val());
-                })
+                });
                 params.roleIds = menuArray.join(",");
             }
             $.post("/admin/sysUser/addSysUser", params, function (data) {

@@ -100,9 +100,9 @@
             }
             layer.confirm('您确定要删除这' + checkData.length + '条数据吗？', {
                 btn: ['确认', '取消']
-            }, function (index, layero) {
+            }, function (index) {
                 layer.close(index);
-                var ids = new Array();
+                var ids = [];
                 $.each(checkData, function (index, val) {
                     ids.push(val.id);
                 });

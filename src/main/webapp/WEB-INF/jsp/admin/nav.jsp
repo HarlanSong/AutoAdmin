@@ -12,7 +12,7 @@
                     <li class="layui-nav-item"><a href="${userMenu.url}">${userMenu.name}</a>
                 </c:when>
                 <c:otherwise>
-                    <li class="layui-nav-item"><a href="javascript:;">${userMenu.name}</a>
+                    <li class="layui-nav-item"><a href="javascript:">${userMenu.name}</a>
                 </c:otherwise>
             </c:choose>
 
@@ -31,7 +31,7 @@
     </ul>
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item" style="margin-right: 20px;">
-            <a href="javascript:;">${user.name}</a>
+            <a href="javascript:">${user.name}</a>
             <dl class="layui-nav-child">
                 <dd><a href="/admin/sysUser/changePasswordView">修改密码</a></dd>
                 <dd><a href="/admin/sysUser/logout">退出</a></dd>

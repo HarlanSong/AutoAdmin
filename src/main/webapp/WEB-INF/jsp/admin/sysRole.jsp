@@ -98,7 +98,7 @@
                 btn: ['确认', '取消']
             }, function (index) {
                 layer.close(index);
-                var ids = new Array();
+                var ids = [];
                 $.each(checkData, function (index, val) {
                     ids.push(val.id);
                 });

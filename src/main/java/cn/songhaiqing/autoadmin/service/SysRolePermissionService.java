@@ -1,19 +1,11 @@
 package cn.songhaiqing.autoadmin.service;
 
-import cn.songhaiqing.autoadmin.base.BaseQuery;
-import cn.songhaiqing.autoadmin.base.BaseResponseList;
-import cn.songhaiqing.autoadmin.model.SysRolePermissionViewModel;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
 @Service
 public interface SysRolePermissionService {
-
-    SysRolePermissionViewModel getSysRolePermissionDetail(long id);
-
-    BaseResponseList<SysRolePermissionViewModel> getSysRolePermission(BaseQuery query);
 
     /**
      * 给指定角色添加权限
