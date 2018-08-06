@@ -9,4 +9,6 @@ public class AdminErrorMsg {
     public static String EXIST_ACCOUNT = "账号已存在";
     public static String PLEASE_CHOOSE_SYS_USER_ROLE = "请选择用户角色";
     public static String PLEASE_CHOOSE_MENU = "必须选择一个可访问的菜单";
+    public static String CONFIRM_PASSWORD_ERROR = "两次密码不一致";
+    public static String OLD_PASSWORD_ERROR = "输入当前密码错误";
 }

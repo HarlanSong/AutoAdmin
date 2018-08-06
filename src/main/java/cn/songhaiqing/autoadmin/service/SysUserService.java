@@ -2,6 +2,7 @@ package cn.songhaiqing.autoadmin.service;
 
 import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.base.BaseResponseList;
+import cn.songhaiqing.autoadmin.exception.AdminException;
 import cn.songhaiqing.autoadmin.model.SysUserViewModel;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +41,6 @@ public interface SysUserService {
     SysUserViewModel getUserDetail(long id);
 
     void deleteSysUser(Long[] ids);
+
+    void changePassword(long id, String oldPassword, String newPassword) throws AdminException;
 }

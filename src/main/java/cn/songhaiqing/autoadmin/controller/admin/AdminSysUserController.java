@@ -2,6 +2,7 @@ package cn.songhaiqing.autoadmin.controller.admin;
 
 import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
 import cn.songhaiqing.autoadmin.base.BaseController;
+import cn.songhaiqing.autoadmin.exception.AdminException;
 import cn.songhaiqing.autoadmin.service.SysRoleService;
 import cn.songhaiqing.autoadmin.service.SysUserService;
 import cn.songhaiqing.autoadmin.base.BaseQuery;
@@ -116,9 +117,34 @@ public class AdminSysUserController extends BaseController {
         sysUserService.updateUser(model, roleIds);
         return success();
     }
+
     @RequestMapping(value = "/deleteSysUser")
     public BaseResponse deleteSysUser( @RequestParam Long[] ids){
         sysUserService.deleteSysUser(ids);
+        return success();
+    }
+
+    @RequestMapping(value = "/changePasswordView", method = RequestMethod.GET)
+    public ModelAndView changePasswordView(HttpServletRequest request) {
+        return new ModelAndView("admin/changePassword");
+    }
+
+    @RequestMapping(value = "/changePassword")
+    public BaseResponse changePassword(HttpServletRequest request,@RequestParam String oldPassword,
+                                       @RequestParam String newPassword,@RequestParam String confirmNewPassword){
+        if(!newPassword.equals(confirmNewPassword)){
+            return fail(AdminErrorMsg.CONFIRM_PASSWORD_ERROR);
+        }
+        String errorMsg = null;
+        try {
+            sysUserService.changePassword(getAdminUser(request).getId(),oldPassword,newPassword);
+        } catch (AdminException e) {
+            errorMsg = e.getErrorMsg();
+        }
+        if(errorMsg != null){
+            return fail(errorMsg);
+        }
+        request.getSession().invalidate();
         return success();
     }
 

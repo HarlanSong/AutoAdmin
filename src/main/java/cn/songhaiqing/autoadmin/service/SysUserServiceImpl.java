@@ -2,6 +2,8 @@ package cn.songhaiqing.autoadmin.service;
 
 import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.base.BaseResponseList;
+import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
+import cn.songhaiqing.autoadmin.exception.AdminException;
 import cn.songhaiqing.autoadmin.utils.DateUtil;
 import cn.songhaiqing.autoadmin.utils.MD5Util;
 import cn.songhaiqing.autoadmin.entity.SysUser;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -151,5 +152,16 @@ public class SysUserServiceImpl implements SysUserService {
             sysUser.setDeleted(true);
             sysUserRepository.save(sysUser);
         }
+    }
+
+    @Override
+    public void changePassword(long id, String oldPassword, String newPassword) throws AdminException {
+        SysUser sysUser = sysUserRepository.findOne(id);
+        if(!sysUser.getPassword().equals(MD5Util.getMd5(MD5Util.getMd5(oldPassword) + sysUser.getSalt()))){
+            throw new AdminException(AdminErrorMsg.OLD_PASSWORD_ERROR);
+        }
+        sysUser.setPassword(MD5Util.getMd5(MD5Util.getMd5(newPassword) + sysUser.getSalt()));
+        sysUser.setUpdateTime(new Date());
+        sysUserRepository.save(sysUser);
     }
 }

@@ -45,7 +45,7 @@
                                    <c:if test="${menuViewModel.checked}">checked</c:if>>
 
                             <c:if test="${not empty menuViewModel.menus}">
-
+                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <c:forEach items="${menuViewModel.menus}" var="menuTag">
 
                                     <input type="checkbox" class="menu" value="${menuTag.id}" title="${menuTag.name}"

@@ -33,6 +33,7 @@
         <li class="layui-nav-item" style="margin-right: 20px;">
             <a href="javascript:;">${user.name}</a>
             <dl class="layui-nav-child">
+                <dd><a href="/admin/sysUser/changePasswordView">修改密码</a></dd>
                 <dd><a href="/admin/sysUser/logout">退出</a></dd>
             </dl>
         </li>
