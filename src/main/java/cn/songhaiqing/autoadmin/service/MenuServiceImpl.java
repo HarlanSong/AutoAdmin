@@ -136,6 +136,7 @@ public class MenuServiceImpl implements MenuService {
             model.setId(menu.getId());
             model.setName(menu.getName());
             model.setUrl(menu.getUrl());
+            model.setIcon(menu.getIcon());
             List<Menu> menuListTag =  menuRepository.findByParentIdOrderByOrderNo(menu.getId());
             if(CollectionUtils.isEmpty(menuListTag)){
                 models.add(model);
@@ -150,6 +151,7 @@ public class MenuServiceImpl implements MenuService {
                 modelTag.setId(menuTag.getId());
                 modelTag.setName(menuTag.getName());
                 modelTag.setUrl(menuTag.getUrl());
+                modelTag.setIcon(menuTag.getIcon());
                 modelListTag.add(modelTag);
             }
             model.setMenus(modelListTag);

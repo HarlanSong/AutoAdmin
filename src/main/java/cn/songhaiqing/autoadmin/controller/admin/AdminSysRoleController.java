@@ -43,7 +43,6 @@ public class AdminSysRoleController extends BaseController {
     }
 
 
-    @AdminPermission(menu = "/admin/sysRole/addSysRoleView")
     @RequestMapping(value = "/addSysRoleView")
     public ModelAndView addRoleView() {
         ModelAndView modelAndView = new ModelAndView("/admin/sysRoleAdd");
@@ -52,7 +51,6 @@ public class AdminSysRoleController extends BaseController {
         return modelAndView;
     }
 
-    @AdminPermission(menu = "/admin/sysRole/updateSysRoleView")
     @RequestMapping(value = "/updateSysRoleView")
     public ModelAndView updateSysRoleView(HttpServletRequest request, @RequestParam Long id) {
         SysRoleViewModel sysRole = sysRoleService.getSysRoleDetail(id);

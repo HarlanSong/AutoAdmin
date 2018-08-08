@@ -32,7 +32,6 @@ public class AdminMenuController extends BaseController {
     }
 
 
-    @AdminPermission(menu = "/admin/menu/addMenuView")
     @RequestMapping(value = "/addMenuView")
     public ModelAndView addMenuView() {
         List<MenuViewModel> menus = menuService.getParentMenu();
@@ -41,7 +40,6 @@ public class AdminMenuController extends BaseController {
         return modelAndView;
     }
 
-    @AdminPermission(menu = "/admin/menu/editMenuView")
     @RequestMapping(value = "/editMenuView")
     public ModelAndView editMenuView(@RequestParam Long id) {
         Menu menu = menuService.getMenu(id);

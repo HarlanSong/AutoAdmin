@@ -10,7 +10,7 @@
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div class="layui-body" style="left:0; padding: 15px;">
+    <div class="layui-body" style="padding: 15px;">
 
         <span class="layui-breadcrumb">
           <a>系统管理</a>

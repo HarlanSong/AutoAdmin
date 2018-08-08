@@ -10,7 +10,7 @@
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div class="layui-body" style="left:0; padding: 15px;">
+    <div class="layui-body" style="padding: 15px;">
         <span class="layui-breadcrumb">
           <a>系统管理</a>
           <a><cite>菜单管理</cite></a>
@@ -28,8 +28,6 @@
                 </a>
             </div>
         </form>
-
-
 
         <table id="table">
         </table>
@@ -51,8 +49,8 @@
                 {checkbox: true},
                 {field: 'id', title: 'ID', width: 80},
                 {field: 'name', title: '名称', width: 120},
-                {field: 'url', title: 'URL', width: 300},
-                {field: 'icon', title: '图标', width: 100},
+                {field: 'url', title: 'URL'},
+                {field: 'icon', title: '图标', width: 150},
                 {field: 'parentId', title: '上级ID', width: 100},
                 {field: 'orderNo', title: '排序号', width: 100},
                 {field: 'updateTime', title: '更新时间', width: 200},

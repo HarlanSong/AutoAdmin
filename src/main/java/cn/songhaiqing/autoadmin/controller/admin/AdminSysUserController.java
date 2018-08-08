@@ -86,7 +86,6 @@ public class AdminSysUserController extends BaseController {
         return success(menus.get(0).getMenus().get(0).getUrl());
     }
 
-    @AdminPermission(menu = "/admin/sysUser/addSysUserView")
     @RequestMapping(value = "/addSysUserView", method = RequestMethod.GET)
     public ModelAndView addUserView() {
         ModelAndView modelAndView = new ModelAndView("/admin/sysUserAdd");
@@ -94,7 +93,6 @@ public class AdminSysUserController extends BaseController {
         return modelAndView;
     }
 
-    @AdminPermission(menu = "/admin/sysUser/editSysUserView")
     @RequestMapping(value = "/editSysUserView", method = RequestMethod.GET)
     public ModelAndView editUserView(HttpServletRequest request, @RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("/admin/sysUserEdit");
