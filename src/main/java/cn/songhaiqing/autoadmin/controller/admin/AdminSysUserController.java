@@ -1,5 +1,6 @@
 package cn.songhaiqing.autoadmin.controller.admin;
 
+import cn.songhaiqing.autoadmin.annotation.AdminPermission;
 import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
 import cn.songhaiqing.autoadmin.base.BaseController;
 import cn.songhaiqing.autoadmin.exception.AdminException;
@@ -14,12 +15,14 @@ import cn.songhaiqing.autoadmin.model.SysUserViewModel;
 import cn.songhaiqing.autoadmin.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +40,7 @@ public class AdminSysUserController extends BaseController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @AdminPermission(menu = "/admin/sysUser/sysUserView")
     @RequestMapping(value = "/sysUserView")
     public ModelAndView userView() {
         return new ModelAndView("/admin/sysUser");
@@ -63,11 +67,26 @@ public class AdminSysUserController extends BaseController {
         if(CollectionUtils.isEmpty(menus)){
             return fail(AdminErrorMsg.MENU_IS_EMPTY);
         }
+        List<String> menuPermission = new ArrayList<>();
+        for (MenuViewModel menu : menus) {
+            if(!StringUtils.isEmpty(menu.getUrl())){
+                menuPermission.add(menu.getUrl());
+            }
+            if(!CollectionUtils.isEmpty(menu.getMenus())){
+                for (MenuViewModel menuViewModel : menu.getMenus()) {
+                    if(!StringUtils.isEmpty(menuViewModel.getUrl())){
+                        menuPermission.add(menuViewModel.getUrl());
+                    }
+                }
+            }
+        }
         request.getSession().setAttribute("userMenus", menus);
+        request.getSession().setAttribute("menuPermission", menuPermission);
         setAdminUserInfo(request, user);
         return success(menus.get(0).getMenus().get(0).getUrl());
     }
 
+    @AdminPermission(menu = "/admin/sysUser/addSysUserView")
     @RequestMapping(value = "/addSysUserView", method = RequestMethod.GET)
     public ModelAndView addUserView() {
         ModelAndView modelAndView = new ModelAndView("/admin/sysUserAdd");
@@ -75,6 +94,7 @@ public class AdminSysUserController extends BaseController {
         return modelAndView;
     }
 
+    @AdminPermission(menu = "/admin/sysUser/editSysUserView")
     @RequestMapping(value = "/editSysUserView", method = RequestMethod.GET)
     public ModelAndView editUserView(HttpServletRequest request, @RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("/admin/sysUserEdit");

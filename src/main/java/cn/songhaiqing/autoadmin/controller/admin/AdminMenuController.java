@@ -1,5 +1,6 @@
 package cn.songhaiqing.autoadmin.controller.admin;
 
+import cn.songhaiqing.autoadmin.annotation.AdminPermission;
 import cn.songhaiqing.autoadmin.base.BaseController;
 import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.base.BaseResponse;
@@ -23,11 +24,15 @@ public class AdminMenuController extends BaseController {
     @Autowired
     private MenuService menuService;
 
+
+    @AdminPermission(menu = "/admin/menu/menuView")
     @RequestMapping(value = "/menuView")
     public ModelAndView menuView() {
         return new ModelAndView("/admin/menu");
     }
 
+
+    @AdminPermission(menu = "/admin/menu/addMenuView")
     @RequestMapping(value = "/addMenuView")
     public ModelAndView addMenuView() {
         List<MenuViewModel> menus = menuService.getParentMenu();
@@ -36,6 +41,7 @@ public class AdminMenuController extends BaseController {
         return modelAndView;
     }
 
+    @AdminPermission(menu = "/admin/menu/editMenuView")
     @RequestMapping(value = "/editMenuView")
     public ModelAndView editMenuView(@RequestParam Long id) {
         Menu menu = menuService.getMenu(id);

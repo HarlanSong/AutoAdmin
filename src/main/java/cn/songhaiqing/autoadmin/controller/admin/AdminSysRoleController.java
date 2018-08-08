@@ -1,5 +1,6 @@
 package cn.songhaiqing.autoadmin.controller.admin;
 
+import cn.songhaiqing.autoadmin.annotation.AdminPermission;
 import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.base.BaseResponse;
 import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
@@ -30,6 +31,7 @@ public class AdminSysRoleController extends BaseController {
     @Autowired
     private MenuService menuService;
 
+    @AdminPermission(menu = "/admin/sysRole/sysRoleView")
     @RequestMapping(value = "/sysRoleView")
     public ModelAndView roleView() {
         return new ModelAndView("/admin/sysRole");
@@ -40,6 +42,8 @@ public class AdminSysRoleController extends BaseController {
         return sysRoleService.getSysRole(query);
     }
 
+
+    @AdminPermission(menu = "/admin/sysRole/addSysRoleView")
     @RequestMapping(value = "/addSysRoleView")
     public ModelAndView addRoleView() {
         ModelAndView modelAndView = new ModelAndView("/admin/sysRoleAdd");
@@ -48,6 +52,7 @@ public class AdminSysRoleController extends BaseController {
         return modelAndView;
     }
 
+    @AdminPermission(menu = "/admin/sysRole/updateSysRoleView")
     @RequestMapping(value = "/updateSysRoleView")
     public ModelAndView updateSysRoleView(HttpServletRequest request, @RequestParam Long id) {
         SysRoleViewModel sysRole = sysRoleService.getSysRoleDetail(id);

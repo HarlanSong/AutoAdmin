@@ -30,7 +30,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <input type="text" name="des" required lay-verify="required" autocomplete="off"
+                            <input type="text" name="des"  autocomplete="off"
                                    class="layui-input" value="${sysRole.des}">
                         </div>
                     </div>
