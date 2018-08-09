@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.songhaiqing.autoadmin.mapper.SysUserMapper">
+
+    <sql id="baseColumn">
+        id, name, account, password, salt, deleted, update_time, create_time
+    </sql>
+
+    <select id="findByPage" resultType="cn.songhaiqing.autoadmin.entity.SysUser">
+        select
+        <include refid="baseColumn"/>
+        from sys_user
+        where deleted = 0
+    </select>
+
+    <select id="countByAccount" resultType="Long" >
+        select count(*) from sys_user where deleted = 0 and account = #{account}
+    </select>
+
+    <select id="countByAccountAndIdNot" resultType="Long" >
+        select count(*) from sys_user where deleted = 0 and account = #{account} and id != #{id}
+    </select>
+
+</mapper>
