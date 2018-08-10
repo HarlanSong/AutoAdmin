@@ -10,29 +10,28 @@
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div class="layui-body" style="padding: 15px;">
+    <div class="layui-body" style="padding: 15px;bottom: 0">
+        <div class="layui-card">
+            <div class="layui-card-header">系统用户</div>
+            <div class="layui-card-body">
+                <form class="layui-form" style="margin-top: 20px;">
+                    <div class="layui-btn-group">
+                        <a class="layui-btn layui-btn-sm btn-add">
+                            <i class="layui-icon">&#xe654;</i>
+                        </a>
+                        <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </div>
+                </form>
 
-        <span class="layui-breadcrumb">
-          <a>系统管理</a>
-          <a><cite>系统用户</cite></a>
-        </span>
-
-        <form class="layui-form" style="margin-top: 20px;">
-            <div class="layui-btn-group">
-                <a class="layui-btn layui-btn-sm btn-add">
-                    <i class="layui-icon">&#xe654;</i>
-                </a>
-                <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
+                <table id="table">
+                </table>
             </div>
-        </form>
-
-        <table id="table">
-        </table>
+        </div>
     </div>
 </div>
 

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="/css/base.css">
-<script src="/layui/layui.js"></script>
+
 <div class="layui-header ">
     <div class="layui-logo">AutoAdmin</div>
     <ul class="layui-nav layui-layout-left">
@@ -36,7 +36,8 @@
                         <c:if test="${not empty userMenu.menus}">
                             <dl class="layui-nav-child">
                                 <c:forEach items="${userMenu.menus}" var="menuItem">
-                                    <dd><a href="<%=request.getContextPath()%>${menuItem.url}">&nbsp;&nbsp;&nbsp;&nbsp;${menuItem.name}</a></dd>
+                                    <dd><a href="<%=request.getContextPath()%>${menuItem.url}">&nbsp;&nbsp;
+                                        <i class="layui-icon ${menuItem.icon}"></i>&nbsp;&nbsp;${menuItem.name}</a></dd>
                                 </c:forEach>
                             </dl>
                         </c:if>
@@ -46,6 +47,7 @@
         </div>
     </div>
 </div>
+<script src="/layui/layui.js"></script>
 <script>
     <c:if test="${empty userMenus}">
     location.href = "/admin/sysUser/loginView";

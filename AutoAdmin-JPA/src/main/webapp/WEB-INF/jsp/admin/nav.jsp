@@ -36,7 +36,8 @@
                         <c:if test="${not empty userMenu.menus}">
                             <dl class="layui-nav-child">
                                 <c:forEach items="${userMenu.menus}" var="menuItem">
-                                    <dd><a href="<%=request.getContextPath()%>${menuItem.url}">&nbsp;&nbsp;&nbsp;&nbsp;${menuItem.name}</a></dd>
+                                    <dd><a href="<%=request.getContextPath()%>${menuItem.url}">&nbsp;&nbsp;
+                                        <i class="layui-icon ${menuItem.icon}"></i>&nbsp;&nbsp;${menuItem.name}</a></dd>
                                 </c:forEach>
                             </dl>
                         </c:if>

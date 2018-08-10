@@ -3,34 +3,35 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>系统管理 | 菜单管理</title>
+    <title>菜单管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div class="layui-body" style="padding: 15px;">
-        <span class="layui-breadcrumb">
-          <a>系统管理</a>
-          <a><cite>菜单管理</cite></a>
-        </span>
-        <form class="layui-form" style="margin-top: 20px;">
-            <div class="layui-btn-group">
-                <a class="layui-btn layui-btn-sm btn-add">
-                    <i class="layui-icon">&#xe654;</i>
-                </a>
-                <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </div>
-        </form>
+    <div class="layui-body" style="padding: 15px;bottom: 0">
+        <div class="layui-card">
+            <div class="layui-card-header">菜单管理</div>
+            <div class="layui-card-body">
+                <form class="layui-form" style="margin-top: 20px;">
+                    <div class="layui-btn-group">
+                        <a class="layui-btn layui-btn-sm btn-add">
+                            <i class="layui-icon">&#xe654;</i>
+                        </a>
+                        <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </div>
+                </form>
 
-        <table id="table">
-        </table>
+                <table id="table">
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
