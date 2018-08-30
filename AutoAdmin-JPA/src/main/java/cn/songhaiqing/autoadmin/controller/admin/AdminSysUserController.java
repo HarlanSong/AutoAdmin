@@ -93,9 +93,9 @@ public class AdminSysUserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editSysUserView", method = RequestMethod.GET)
-    public ModelAndView editUserView(HttpServletRequest request, @RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("/admin/sysUserEdit");
+    @RequestMapping(value = "/updateSysUserView", method = RequestMethod.GET)
+    public ModelAndView updateSysUserView(HttpServletRequest request, @RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView("/admin/sysUserUpdate");
         SysUserViewModel userViewModel = sysUserService.getUserDetail(id);
         modelAndView.addObject("roles", sysRoleService.getAllRoles(id));
         modelAndView.addObject("userViewModel", userViewModel);
@@ -121,8 +121,8 @@ public class AdminSysUserController extends BaseController {
         return success();
     }
 
-    @RequestMapping(value = "/editSysUser", method = RequestMethod.POST)
-    public BaseResponse editUser(SysUserViewModel model, Long[] roleIds) {
+    @RequestMapping(value = "/updateSysUser", method = RequestMethod.POST)
+    public BaseResponse updateSysUser(SysUserViewModel model, Long[] roleIds) {
         if (sysUserService.existAccount(model.getAccount(), model.getId())) {
             return fail(AdminErrorMsg.EXIST_ACCOUNT);
         }

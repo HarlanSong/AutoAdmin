@@ -1,18 +1,17 @@
 package cn.songhaiqing.autoadmin.controller.admin;
 
-import cn.songhaiqing.autoadmin.annotation.AdminPermission;
-import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
 import cn.songhaiqing.autoadmin.base.BaseController;
-import cn.songhaiqing.autoadmin.exception.AdminException;
-import cn.songhaiqing.autoadmin.service.SysRoleService;
-import cn.songhaiqing.autoadmin.service.SysUserService;
 import cn.songhaiqing.autoadmin.base.BaseQuery;
 import cn.songhaiqing.autoadmin.base.BaseResponse;
 import cn.songhaiqing.autoadmin.base.BaseResponseList;
-import cn.songhaiqing.autoadmin.utils.MD5Util;
+import cn.songhaiqing.autoadmin.constants.AdminErrorMsg;
+import cn.songhaiqing.autoadmin.exception.AdminException;
 import cn.songhaiqing.autoadmin.model.MenuViewModel;
 import cn.songhaiqing.autoadmin.model.SysUserViewModel;
 import cn.songhaiqing.autoadmin.service.MenuService;
+import cn.songhaiqing.autoadmin.service.SysRoleService;
+import cn.songhaiqing.autoadmin.service.SysUserService;
+import cn.songhaiqing.autoadmin.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,6 @@ public class AdminSysUserController extends BaseController {
     @Autowired
     private SysRoleService sysRoleService;
 
-    @AdminPermission(menu = "/admin/sysUser/sysUserView")
     @RequestMapping(value = "/sysUserView")
     public ModelAndView userView() {
         return new ModelAndView("/admin/sysUser");
@@ -93,9 +92,9 @@ public class AdminSysUserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editSysUserView", method = RequestMethod.GET)
-    public ModelAndView editUserView(HttpServletRequest request, @RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("/admin/sysUserEdit");
+    @RequestMapping(value = "/updateSysUserView", method = RequestMethod.GET)
+    public ModelAndView updateUserView(HttpServletRequest request, @RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView("/admin/sysUserUpdate");
         SysUserViewModel userViewModel = sysUserService.getUserDetail(id);
         modelAndView.addObject("roles", sysRoleService.getAllRoles(id));
         modelAndView.addObject("userViewModel", userViewModel);
@@ -121,8 +120,8 @@ public class AdminSysUserController extends BaseController {
         return success();
     }
 
-    @RequestMapping(value = "/editSysUser", method = RequestMethod.POST)
-    public BaseResponse editUser(SysUserViewModel model, Long[] roleIds) {
+    @RequestMapping(value = "/updateSysUser", method = RequestMethod.POST)
+    public BaseResponse updateSysUser(SysUserViewModel model, Long[] roleIds) {
         if (sysUserService.existAccount(model.getAccount(), model.getId())) {
             return fail(AdminErrorMsg.EXIST_ACCOUNT);
         }

@@ -40,11 +40,11 @@ public class AdminMenuController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editMenuView")
-    public ModelAndView editMenuView(@RequestParam Long id) {
+    @RequestMapping(value = "/updateMenuView")
+    public ModelAndView updateMenuView(@RequestParam Long id) {
         Menu menu = menuService.getMenu(id);
         List<MenuViewModel> menus = menuService.getParentMenu();
-        ModelAndView model = new ModelAndView("/admin/menuEdit");
+        ModelAndView model = new ModelAndView("/admin/menuUpdate");
         model.addObject("menu", menu);
         model.addObject("menus", menus);
         return model;
@@ -61,8 +61,8 @@ public class AdminMenuController extends BaseController {
         return success();
     }
 
-    @RequestMapping(value = "/editMenu", method = RequestMethod.POST)
-    public BaseResponse editMenu(MenuViewModel model) {
+    @RequestMapping(value = "/updateMenu", method = RequestMethod.POST)
+    public BaseResponse updateMenu(MenuViewModel model) {
         menuService.editMenu(model);
         return success();
     }

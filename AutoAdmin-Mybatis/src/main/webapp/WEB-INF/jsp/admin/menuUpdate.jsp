@@ -72,9 +72,8 @@
     layui.use(['form', 'jquery'], function () {
         var form = layui.form;
         var $ = layui.jquery;
-        //监听提交
         form.on('submit(formDemo)', function (data) {
-            $.post("/admin/menu/editMenu", data.field, function (data) {
+            $.post("/admin/menu/updateMenu", data.field, function (data) {
                 if (data.code === 0) {
                     parent.layer.closeAll();
                     layer.msg('创建成功', {icon: 1});

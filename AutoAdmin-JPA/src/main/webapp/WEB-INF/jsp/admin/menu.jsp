@@ -10,30 +10,30 @@
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div class="layui-body" style="padding: 15px;bottom: 0">
+    <div  class="layui-body" style="padding: 15px;bottom: 0">
         <div class="layui-card">
             <div class="layui-card-header">菜单管理</div>
             <div class="layui-card-body">
-                <form class="layui-form" style="margin-top: 20px;">
-                    <div class="layui-btn-group">
-                        <a class="layui-btn layui-btn-sm btn-add">
-                            <i class="layui-icon">&#xe654;</i>
-                        </a>
-                        <a class="layui-btn layui-btn-sm btn-update layui-btn-normal">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a class="layui-btn layui-btn-sm btn-delete layui-btn-danger">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </div>
-                </form>
-
-                <table id="table">
+                <table class="layui-hide"  id="table" lay-filter="menu">
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/html" id="toolBar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">
+            <i class="layui-icon">&#xe654;</i>
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">
+            <i class="layui-icon">&#xe642;</i>
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">
+            <i class="layui-icon">&#xe640;</i>
+        </button>
+    </div>
+</script>
 
 <script>
     layui.use(['element', 'table', 'jquery'], function () {
@@ -42,7 +42,7 @@
         var $ = layui.jquery;
         table.render({
             elem: '#table',
-            id: "menu",
+            toolbar: "#toolBar",
             url: '/admin/menu/getMenuPage',
             page: true,
             limit: 20,
@@ -59,64 +59,65 @@
             ]]
         });
 
-        $(".btn-add").on("click", function () {
-            layer.open({
-                formType: 2,
-                type: 2,
-                content: '/admin/menu/addMenuView',
-                title: '添加菜单',
-                area: ['600px', '400px'], //自定义文本域宽高
-                end: function () {
-                    location.reload();
-                }
-            });
-        });
-
-        $(".btn-update").on("click", function () {
-            var checkData = table.checkStatus('menu').data; //test即为基础参数id对应的值
-            if (checkData.length != 1) {
-                layer.msg("请选中一条记录编辑！");
-                return;
-            }
-            var id = checkData[0].id;
-            layer.open({
-                formType: 2,
-                type: 2,
-                content: '/admin/menu/editMenuView?id=' + id,
-                title: '编辑菜单',
-                area: ['600px', '400px'],
-                end: function () {
-                    location.reload();
-                }
-            });
-        });
-
-        $(".btn-delete").on("click", function () {
-            var checkData = table.checkStatus('menu').data; //test即为基础参数id对应的值
-            if (checkData.length < 1) {
-                layer.msg("请选中要删除的数据！");
-                return;
-            }
-            layer.confirm('您确定要删除这' + checkData.length + '条数据吗？', {
-                btn: ['确认', '取消']
-            }, function (index) {
-                layer.close(index);
-                var ids = [];
-                $.each(checkData, function (index, val) {
-                    ids.push(val.id);
-                });
-                $.post("/admin/menu/deleteMenu", {ids: ids.join(",")}, function (data) {
-                    if (data.code === 0) {
-                        layer.msg('删除成功', {icon: 1});
-                        location.reload();
-                    } else {
-                        layer.alert(data.msg, {icon: 5});
+        table.on('toolbar(menu)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        formType: 2,
+                        type: 2,
+                        content: '/admin/menu/addMenuView',
+                        title: '添加菜单',
+                        area: ['600px', '400px'],
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                    break;
+                case 'update':
+                    var checkData = checkStatus.data;
+                    if (checkData.length != 1) {
+                        layer.msg("请选中一条记录编辑！");
+                        return;
                     }
-                }, "json");
-            });
+                    var id = checkData[0].id;
+                    layer.open({
+                        formType: 2,
+                        type: 2,
+                        content: '/admin/menu/updateMenuView?id=' + id,
+                        title: '编辑菜单',
+                        area: ['600px', '400px'],
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                    break;
+                case 'delete':
+                    var checkData = checkStatus.data;
+                    if (checkData.length < 1) {
+                        layer.msg("请选中要删除的数据！");
+                        return;
+                    }
+                    layer.confirm('您确定要删除这' + checkData.length + '条数据吗？', {
+                        btn: ['确认', '取消']
+                    }, function (index) {
+                        layer.close(index);
+                        var ids = [];
+                        $.each(checkData, function (index, val) {
+                            ids.push(val.id);
+                        });
+                        $.post("/admin/menu/deleteMenu", {ids: ids.join(",")}, function (data) {
+                            if (data.code === 0) {
+                                layer.msg('删除成功', {icon: 1});
+                                location.reload();
+                            } else {
+                                layer.alert(data.msg, {icon: 5});
+                            }
+                        }, "json");
+                    });
+                    break;
+            }
         });
-
-
     });
 </script>
 </body>

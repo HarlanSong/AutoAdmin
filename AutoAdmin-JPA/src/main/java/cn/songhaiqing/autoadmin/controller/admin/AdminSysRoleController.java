@@ -71,7 +71,7 @@ public class AdminSysRoleController extends BaseController {
     }
 
     @RequestMapping(value = "/updateSysRole", method = RequestMethod.POST)
-    public BaseResponse editSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
+    public BaseResponse updateSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
         if (menuIds == null || menuIds.length == 0) {
             return fail(AdminErrorMsg.PLEASE_CHOOSE_MENU);
         }

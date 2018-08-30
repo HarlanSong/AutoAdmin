@@ -48,10 +48,10 @@ public class AdminSysRoleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editSysRoleView")
-    public ModelAndView editRoleView(HttpServletRequest request, @RequestParam Long id) {
+    @RequestMapping(value = "/updateSysRoleView")
+    public ModelAndView updateSysRoleView(@RequestParam Long id) {
         SysRoleViewModel sysRole = sysRoleService.getSysRoleDetail(id);
-        ModelAndView modelAndView = new ModelAndView("/admin/sysRoleEdit");
+        ModelAndView modelAndView = new ModelAndView("/admin/sysRoleUpdate");
         List<MenuViewModel> menuViewModels = menuService.getAllMenuByRole(id);
         modelAndView.addObject("sysRole", sysRole);
         modelAndView.addObject("menuViewModels", menuViewModels);
@@ -67,8 +67,8 @@ public class AdminSysRoleController extends BaseController {
         return success();
     }
 
-    @RequestMapping(value = "/editSysRole", method = RequestMethod.POST)
-    public BaseResponse editSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
+    @RequestMapping(value = "/updateSysRole", method = RequestMethod.POST)
+    public BaseResponse updateSysRole(SysRoleViewModel model, @RequestParam Long[] menuIds) {
         if (menuIds == null || menuIds.length == 0) {
             return fail(AdminErrorMsg.PLEASE_CHOOSE_MENU);
         }

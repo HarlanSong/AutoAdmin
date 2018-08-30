@@ -26,20 +26,21 @@ public class AdminInterceptor implements HandlerInterceptor {
             httpServletResponse.sendRedirect("/admin/sysUser/loginView");
             return false;
         }
-        HandlerMethod handlerMethod = (HandlerMethod) o;
-        Method method = handlerMethod.getMethod();
-        AdminPermission permission = method.getAnnotation(AdminPermission.class);
-        if(permission != null){
-            String permissionValue = permission.menu();
-            if(permissionValue != null && permissionValue.length() > 0){
-                List<String> menuPermission = (List<String>) httpServletRequest.getSession().getAttribute("menuPermission");
-                if(!menuPermission.contains(permissionValue)){
-                    httpServletResponse.sendRedirect("/admin/sysUser/loginView");
-                    return false;
+        if(o instanceof HandlerMethod){
+            HandlerMethod handlerMethod = (HandlerMethod) o;
+            Method method = handlerMethod.getMethod();
+            AdminPermission permission = method.getAnnotation(AdminPermission.class);
+            if(permission != null){
+                String permissionValue = permission.menu();
+                if(permissionValue != null && permissionValue.length() > 0){
+                    List<String> menuPermission = (List<String>) httpServletRequest.getSession().getAttribute("menuPermission");
+                    if(!menuPermission.contains(permissionValue)){
+                        httpServletResponse.sendRedirect("/admin/sysUser/loginView");
+                        return false;
+                    }
                 }
             }
         }
-
         return true;
     }
 

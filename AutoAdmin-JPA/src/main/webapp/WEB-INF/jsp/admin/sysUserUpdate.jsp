@@ -62,7 +62,6 @@
         var form = layui.form;
         var $ = layui.jquery;
         var element = layui.element;
-        //监听提交
         form.on('submit(formDemo)', function (data) {
             var params = data.field;
             var checkedMenu = $("input:checkbox:checked");
@@ -73,7 +72,7 @@
                 });
                 params.roleIds = menuArray.join(",");
             }
-            $.post("/admin/sysUser/editSysUser", params, function (data) {
+            $.post("/admin/sysUser/updateSysUser", params, function (data) {
                 if (data.code === 0) {
                     parent.layer.closeAll();
                     layer.msg('编辑成功', {icon: 1});

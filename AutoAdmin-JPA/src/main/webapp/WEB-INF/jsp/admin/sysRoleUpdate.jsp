@@ -69,12 +69,10 @@
 
 <script src="/layui/layui.js"></script>
 <script>
-    //Demo
     layui.use(['form', 'jquery', 'element'], function () {
         var form = layui.form;
         var $ = layui.jquery;
         var element = layui.element;
-        //监听提交
         form.on('submit(formDemo)', function (data) {
             var params = data.field;
             var checkedMenu = $("input:checkbox:checked");
