@@ -1,6 +1,5 @@
 ## [Spring Boot](https://projects.spring.io/spring-boot/)、[Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
 
-
 ## 项目结构
 ```
 ├─src main
