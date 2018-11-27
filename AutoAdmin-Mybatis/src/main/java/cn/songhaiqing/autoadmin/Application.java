@@ -6,9 +6,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("cn.songhaiqing.autoadmin.mapper")
-public class AutoAdminApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AutoAdminApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

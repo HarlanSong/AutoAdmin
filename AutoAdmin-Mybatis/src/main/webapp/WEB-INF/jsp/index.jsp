@@ -5,7 +5,7 @@
 
 </head>
 <body>
-AutoAdmin
+AutoAdmin-Mybatis
 
 </body>
 </html>

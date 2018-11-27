@@ -57,9 +57,14 @@ spring.datasource.password
 ### 3. 运行
 Maven构建成功后可看到Application可运行，后点击运行即可。（建议IDE使用Idea）
 
+**设置热部署**
+IDEA需要进行一项简单的设置，File > Settings > Build,Excutioni,Deployment > Compiler 将Build project automatically选上。
+![AutoAdmin](https://github.com/HarlanSong/AutoAdmin/blob/master/images/HotDeploymentSetting.png)
+
+
 ### 4、访问
 根据自己配置的端口（`server.port`）访问`http://localhost:端口 ` 就可以看到AutoAdmin即成功。`http://localhost:端口/admin/`为管理端的登录入口。 默认账号和密码都是`admin`。
 
-## 联系方式
-* Email:harlansong@qq.com
+
+## 沟通交流加QQ群
 * QQ群：805405756

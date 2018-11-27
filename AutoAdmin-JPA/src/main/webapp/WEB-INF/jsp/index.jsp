@@ -5,7 +5,7 @@
 
 </head>
 <body>
-AutoAdmin
+AutoAdmin-JPA
 
 </body>
 </html>
