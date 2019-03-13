@@ -9,8 +9,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
-
-    <div class="layui-body" style="padding: 15px;bottom: 0">
+    <div class="layui-body" style="padding: 10px;bottom: 0">
         <div class="layui-card">
             <div class="layui-card-header">系统用户</div>
             <div class="layui-card-body">
@@ -49,12 +48,11 @@
             limit: 20,
             cols: [[
                 {checkbox: true},
-                {field: 'id', title: 'ID', width: 80},
-                {field: 'account', title: '账号', width: 150},
-                {field: 'name', title: '姓名', width: 120},
-                {field: 'roleName', title: '角色', width: 300},
-                {field: 'updateTime', title: '创建时间', width: 200},
-                {field: 'createTime', title: '创建时间', width: 200}
+                {field: 'account', title: '账号'},
+                {field: 'name', title: '姓名'},
+                {field: 'roleName', title: '角色'},
+                {field: 'updateTime', title: '创建时间'},
+                {field: 'createTime', title: '创建时间'}
             ]]
         });
 

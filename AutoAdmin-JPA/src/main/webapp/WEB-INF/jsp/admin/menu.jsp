@@ -10,7 +10,7 @@
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="nav.jsp"/>
 
-    <div  class="layui-body" style="padding: 15px;bottom: 0">
+    <div  class="layui-body" style="padding: 10px;bottom: 0">
         <div class="layui-card">
             <div class="layui-card-header">菜单管理</div>
             <div class="layui-card-body">
@@ -48,7 +48,6 @@
             limit: 20,
             cols: [[
                 {checkbox: true},
-                {field: 'id', title: 'ID', width: 80},
                 {field: 'name', title: '名称', width: 120},
                 {field: 'url', title: 'URL'},
                 {field: 'icon', title: '图标', width: 150},
