@@ -17,6 +17,6 @@ public class TestDemo {
 
     @Test
     public void test(){
-
+        // 测试方法，可像Controller一样直接使用service
     }
 }
